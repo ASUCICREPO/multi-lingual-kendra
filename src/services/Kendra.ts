@@ -7,13 +7,20 @@ import Translate from "aws-sdk/clients/translate";
 const _loadingErrors = [];
 
 // If you get an error here, please revisit the Getting Started section of the README
-let config = null;
-try {
-  config = require(`./${CREDENTIALS_FILE_NAME}`);
-} catch {
-  _loadingErrors.push(
-    `${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME} could not be loaded. See Getting Started in the README.`
-  );
+// let config = null;
+// try {
+//   config = require(`./${CREDENTIALS_FILE_NAME}`);
+// } catch {
+//   _loadingErrors.push(
+//     `${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME} could not be loaded. See Getting Started in the README.`
+//   );
+// }
+
+let config = {
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
+  region: process.env.region,
+  indexId: process.env.indexId
 }
 
 if (config) {
@@ -27,11 +34,11 @@ if (config) {
       `There is no secretAccessKey provided in ${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME}`
     );
   }
-  if (!config.sessionToken) {
-    _loadingErrors.push(
-      `There is no sessionToken provided in ${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME}`
-    );
-  }
+  // if (!config.sessionToken) {
+  //   _loadingErrors.push(
+  //     `There is no sessionToken provided in ${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME}`
+  //   );
+  // }
   if (!config.region) {
     _loadingErrors.push(
       `There is no region provided in ${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME}`
@@ -57,7 +64,6 @@ export const kendra = !hasErrors
   ? new Kendra({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
-      sessionToken: config.sessionToken,
       region: config.region,
     })
   : undefined;
@@ -66,7 +72,6 @@ export const s3 = !hasErrors
   ? new S3({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
-      sessionToken: config.sessionToken,
       region: config.region,
     })
   : undefined;
@@ -75,7 +80,6 @@ export const comprehend = !hasErrors
   ? new Comprehend({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
-      sessionToken: config.sessionToken,
       region: config.region,
     })
   : undefined;
@@ -84,7 +88,6 @@ export const translate = !hasErrors
   ? new Translate({
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
-      sessionToken: config.sessionToken,
       region: config.region,
     })
   : undefined;

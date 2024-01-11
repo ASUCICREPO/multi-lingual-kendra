@@ -239,11 +239,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
         );
       }
 
-      // if(results.ResultItems) {
-      //   var someres = translateResults(detectedlang, results.ResultItems)
-      //   console.log(someres)
-      // }
-
+      console.log(results)
       const tempTopResults: Kendra.QueryResultItemList = [];
       const tempFAQResults: Kendra.QueryResultItemList = [];
       const tempDocumentResults: Kendra.QueryResultItemList = [];
@@ -634,18 +630,7 @@ function textTranslate(sourcelang: string, destlang: string, text: string): Prom
 }
 
 async function translateResults(detectedlanguage: string, resultsarray: Kendra.QueryResultItemList) {
-  // resultsarray.forEach(async (result) => {
-    
-  //   // console.log(result.DocumentTitle?.Text)
-  //   if(result.DocumentTitle?.Text)
-  //   {
-  //     result.DocumentTitle.Text= await textTranslate('en', detectedlanguage , result.DocumentTitle?.Text)
-  //     console.log(result.DocumentTitle.Text)
-  //   }
 
-  // });
-
-  // return resultsarray
 
   const translatedResults = await Promise.all(resultsarray.map(async (result) => {
     if (result.DocumentTitle?.Text) {

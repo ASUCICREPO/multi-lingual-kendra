@@ -1,1 +1,2 @@
 node_modules
+/src/services/local-dev-credentials.json
