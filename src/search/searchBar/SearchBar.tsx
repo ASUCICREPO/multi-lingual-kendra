@@ -106,7 +106,7 @@ export default class SearchBar extends React.Component<
     const { onSubmit } = this.props;
 
     this.setState({ queryText: value });
-    console.log(value)
+    // console.log(value)
     onSubmit(value, 1);
   };
 
@@ -209,7 +209,7 @@ function detectLanguage(text: string): Promise<string> {
         }// an error occurred
         else {
           detectedlanguage = data.Languages?.[0]?.LanguageCode || ''
-          console.log(detectedlanguage);   
+          // console.log(detectedlanguage);   
           resolve(detectedlanguage)
         }      
       });

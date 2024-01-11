@@ -23,7 +23,6 @@ const config = {
   indexId: process.env.REACT_APP_INDEXID
 }
 
-console.log(config.region)
 if (config) {
   if (!config.accessKeyId) {
     _loadingErrors.push(

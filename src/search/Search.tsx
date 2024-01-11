@@ -198,7 +198,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     try {
       var detectedlang = await detectLanguage(queryText)
       var translatedText = await textTranslate(detectedlang, 'en', queryText)
-      console.log(translatedText)
+      // console.log(translatedText)
 
       const queryRequest: QueryRequest = {
         IndexId: this.props.indexId,
@@ -207,7 +207,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
         AttributeFilter: filter ? filter : undefined,
       };
 
-      console.log(queryRequest)
+      // console.log(queryRequest)
 
       const sortingAttribute = this.state.selectedSortingAttribute.getSelectedSortingAttribute();
       const sortingOrder = this.state.selectedSortingAttribute.getSelectedSortingOrder();
@@ -239,14 +239,14 @@ export default class Search extends React.Component<SearchProps, SearchState> {
         );
       }
 
-      console.log(results)
+      // console.log(results)
       const tempTopResults: Kendra.QueryResultItemList = [];
       const tempFAQResults: Kendra.QueryResultItemList = [];
       const tempDocumentResults: Kendra.QueryResultItemList = [];
 
       if (results && results.ResultItems) {
         results.ResultItems = await translateResults(detectedlang, results.ResultItems)
-        console.log(results.ResultItems)
+        // console.log(results.ResultItems)
         results.ResultItems.forEach(async (result: Kendra.QueryResultItem) => {
         //   if(result.DocumentTitle?.Text)
         //   {
@@ -590,7 +590,7 @@ function detectLanguage(text: string): Promise<string> {
         }// an error occurred
         else {
           detectedlanguage = data.Languages?.[0]?.LanguageCode || ''
-          console.log(detectedlanguage);   
+          // console.log(detectedlanguage);   
           resolve(detectedlanguage)
         }      
       });
