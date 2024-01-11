@@ -17,10 +17,10 @@ const _loadingErrors = [];
 // }
 
 const config = {
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: process.env.region,
-  indexId: process.env.indexId
+  accessKeyId: process.env.REACT_APP_ACCESS_ID,
+  secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+  region: process.env.REACT_APP_REGION,
+  indexId: process.env.REACT_APP_INDEXID
 }
 
 console.log(config.region)
