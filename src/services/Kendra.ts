@@ -6,7 +6,7 @@ import Translate from "aws-sdk/clients/translate";
 
 const _loadingErrors = [];
 
-// If you get an error here, please revisit the Getting Started section of the README
+// // If you get an error here, please revisit the Getting Started section of the README
 // let config = null;
 // try {
 //   config = require(`./${CREDENTIALS_FILE_NAME}`);
@@ -16,13 +16,14 @@ const _loadingErrors = [];
 //   );
 // }
 
-let config = {
+const config = {
   accessKeyId: process.env.accessKeyId,
   secretAccessKey: process.env.secretAccessKey,
   region: process.env.region,
   indexId: process.env.indexId
 }
 
+console.log(config.region)
 if (config) {
   if (!config.accessKeyId) {
     _loadingErrors.push(
@@ -58,7 +59,7 @@ if (hasErrors) {
 
 export const errors = _loadingErrors;
 
-export const indexId = config ? config.indexId : undefined;
+export const indexId = "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
 
 export const kendra = !hasErrors
   ? new Kendra({

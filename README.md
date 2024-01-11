@@ -1,3 +1,13 @@
+# Multi-Lingual Kendra Search App
+
+## Prerequisites
+
+## Instructions to run
+
+
+
+
+
 Kendra Search App
 
 The Kendra search app is a set of sample files that developers can use to build a functional search experience - integrated with Amazon Kendra - into their existing React web application.  It contains all of the logic to display Kendra search results just like they are presented in the AWS Console for Amazon Kendra including formatting, separation of result types, pagination, and more.
