@@ -17,19 +17,21 @@ In order to deploy a Kendra search app, we need to have the following prerequisi
 ## Instructions to run
 ### To run locally
 - Clone the repo
-- Populate the Access Key ID, Secret Access Key, region and Kendra Index ID fields in '/src/services/local-dev-credentials.json'
+- Populate the Access Key ID, Secret Access Key, region and Kendra Index ID fields in `/src/services/local-dev-credentials.json`
 - After entering inside the cloned folder, run `npm install` to install dependencies
 - Run `npm start`
 
 ### To edit and run through Amplify deployment
 - Clone the repo
 - Ensure that Access Key ID, Secret Access Key, region and Kendra Index ID fields are passed as environment variables to the Amplify deployment.
-- In '/src/services/Kendra.ts'
+- In `/src/services/Kendra.ts`
     - Comment lines 10-17
     - Uncomment lines 19-24
 
 ---------------------------------------------------------------------------------------
-=======================================================================================
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
 Kendra Search App
 
 The Kendra search app is a set of sample files that developers can use to build a functional search experience - integrated with Amazon Kendra - into their existing React web application.  It contains all of the logic to display Kendra search results just like they are presented in the AWS Console for Amazon Kendra including formatting, separation of result types, pagination, and more.
