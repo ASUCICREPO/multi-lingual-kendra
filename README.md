@@ -1,9 +1,25 @@
 # Multi-Lingual Kendra Search App
 
 ## Prerequisites
+In order to deploy a Kendra search app, we need to have the following prerequisites set up
+- Have an AWS account with Access Key ID and Secret Access Key
+- Create a Kendra index
+- Add data sources to the created index
+    - To add a website link as the Data source, use the Web Crawler v2.0 connector
+- Ensure your development environment has the following frameworks/libraries:
+    - React (version 16.13.0")
+    - Bootstrap (version: 5.2.0)
+    - Typescript (version 5.0.4)
+    - @types/lodash
+    - aws-sdk
+
 
 ## Instructions to run
-
+### To run locally
+- Clone the repo locally
+- Populate the Access Key ID, Secret Access Key, region and Kendra Index ID fields in '/src/services/local-dev-credentials.json'
+- After entering inside the cloned folder, run `npm install` to install dependencies
+- Run `npm start`
 
 
 
