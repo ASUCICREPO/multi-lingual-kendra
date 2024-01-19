@@ -306,6 +306,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
           topResults: tempTopResults,
           faqResults: tempFAQResults,
           docResults: tempDocumentResults,
+          queryTextLanguage: detectedlang,
           dataReady: true,
           error: undefined,
         });

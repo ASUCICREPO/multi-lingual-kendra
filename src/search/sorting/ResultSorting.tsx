@@ -11,6 +11,7 @@ import {
 } from "../constants";
 
 import "./ResultSorting.scss";
+import { translate } from "../../services/Kendra"
 
 interface OwnProps {
   availableSortingAttributes: AvailableSortingAttributesManager;
@@ -21,17 +22,45 @@ interface OwnProps {
   onSortingOrderChange: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
+  resultlang: string;
 }
 
 type Props = OwnProps;
-export class ResultSorting extends React.Component<Props> {
+export class ResultSorting extends React.Component<Props, { translatedDict: Record<string, string> | null} > {
+
+  state = {
+    translatedDict: null
+  };
+
+  componentDidMount() {
+    this.translateAndSetSortConstants();
+  }
+
+  translateAndSetSortConstants = async () => {
+    const { resultlang } = this.props;
+    const translatedDict: Record<string, string> = {};
+
+    await Promise.all(
+      this.props.availableSortingAttributes.get().map(async (result) => {
+        var newres = await textTranslate('en', resultlang, DocumentAttributeTitleLookup[result] ?? result);
+        translatedDict[result] = newres;
+      })
+    );
+    translatedDict[DEFAULT_SORT_ATTRIBUTE] = await textTranslate('en', resultlang, DEFAULT_SORT_ATTRIBUTE);
+    translatedDict[i18n.sort] =  await textTranslate('en', resultlang, i18n.sort);
+    this.setState({ translatedDict });
+    console.log(translatedDict)
+
+  };
+
   getSortingAttributeSelectOptions = (attributeList: string[]) => {
     /* Using optgroup to apply css style for limiting attributes number displayed in dropdown */
+    const { translatedDict } = this.state;
 
     return (
       <optgroup className="opt-group">
         {/* Relevance is the first to show */}
-        <option value={DEFAULT_SORT_ATTRIBUTE}>{DEFAULT_SORT_ATTRIBUTE}</option>
+        <option value={DEFAULT_SORT_ATTRIBUTE}>{translatedDict?.[DEFAULT_SORT_ATTRIBUTE]}</option>
 
         {/* Shows Created at and Updated at after Relevance */}
         {attributeList.indexOf(DocumentAttributeKeys.CreatedAt) >= 0 ? (
@@ -42,7 +71,8 @@ export class ResultSorting extends React.Component<Props> {
               DocumentAttributeKeys.CreatedAt
             }
           >
-            {DocumentAttributeTitleLookup[DocumentAttributeKeys.CreatedAt]}
+            {/* {DocumentAttributeTitleLookup[DocumentAttributeKeys.CreatedAt]} */}
+            {translatedDict?.[DocumentAttributeKeys.CreatedAt]}
           </option>
         ) : null}
         {attributeList.indexOf(DocumentAttributeKeys.UpdatedAt) >= 0 ? (
@@ -53,7 +83,8 @@ export class ResultSorting extends React.Component<Props> {
               DocumentAttributeKeys.UpdatedAt
             }
           >
-            {DocumentAttributeTitleLookup[DocumentAttributeKeys.UpdatedAt]}
+            {/* {DocumentAttributeTitleLookup[DocumentAttributeKeys.UpdatedAt]} */}
+            {translatedDict?.[DocumentAttributeKeys.UpdatedAt]}
           </option>
         ) : null}
 
@@ -63,6 +94,7 @@ export class ResultSorting extends React.Component<Props> {
             attribute !== DocumentAttributeKeys.CreatedAt &&
             attribute !== DocumentAttributeKeys.UpdatedAt
           ) {
+            console.log(translatedDict?.[attribute]);
             return (
               <option
                 value={attribute}
@@ -71,7 +103,7 @@ export class ResultSorting extends React.Component<Props> {
                   attribute
                 }
               >
-                {DocumentAttributeTitleLookup[attribute] ?? attribute}
+                {translatedDict?.[attribute]}
               </option>
             );
           } else {
@@ -127,11 +159,11 @@ export class ResultSorting extends React.Component<Props> {
   };
 
   render() {
+    const { translatedDict } = this.state;
     const sortingOrder = this.props.selectedSortingAttribute.getSelectedSortingOrder();
-
     return (
       <div className="query-result-sorting-container">
-        <span className="sort-text">{i18n.sort}</span>
+        <span className="sort-text">{translatedDict?.[i18n.sort]}</span>
         <div className="sorting-attributes-dropdown">
           {this.renderSortingAttributeSelect(
             this.props.availableSortingAttributes.get()
@@ -147,4 +179,32 @@ export class ResultSorting extends React.Component<Props> {
       </div>
     );
   }
+}
+
+
+function textTranslate(sourcelang: string, destlang: string, text: string): Promise<string> {
+  return new Promise((resolve) => {
+    var translatedText = text
+    var params = {
+      SourceLanguageCode: sourcelang,
+      TargetLanguageCode: destlang, 
+      Text: text, 
+    };
+
+    if(translate) {
+      translate.translateText(params, function(err, data) {
+        if (err){
+          console.log(err, err.stack);
+          resolve(text)
+        } 
+        else {    
+          translatedText = data.TranslatedText || '' 
+          resolve(translatedText)
+        }
+      });
+    }
+    else {
+      resolve(text)
+    }
+  });
 }

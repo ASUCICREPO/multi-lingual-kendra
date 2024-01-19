@@ -10,10 +10,11 @@ import SingleRightArrow from "./components/SingleRightArrow";
 import ResultTitle from "./components/ResultTitle";
 import ResultText from "./components/ResultText";
 import ResultFooter from "./components/ResultFooter";
-
+import { translate } from "../../services/Kendra"
 import "../search.scss";
 
 const KENDRA_SUGGESTED_ANSWERS = "Amazon Kendra suggested answers";
+var KENDRA_SUGGESTED_ANSWERS_TRANSLATED = "Amazon Kendra suggested answers";
 const MAX_TOP_ANSWER_LENGTH = 25;
 
 interface TopResultsProps {
@@ -23,11 +24,13 @@ interface TopResultsProps {
     relevance: Relevance,
     resultItem: Kendra.QueryResultItem
   ) => Promise<void>;
+  resultlang: string;
 }
 
 interface TopResultsState {
   currentResultIndex: number;
   totalResults: number;
+  translatedAnswers: string;
 }
 
 export default class TopResults extends React.Component<
@@ -35,9 +38,26 @@ export default class TopResults extends React.Component<
   TopResultsState
 > {
   // All results in this component has QueryResultType === "ANSWER"
+
+  
   state = {
     currentResultIndex: 0,
-    totalResults: this.props.results.length
+    totalResults: this.props.results.length,
+    translatedAnswers: ''
+  };
+
+  componentDidMount() {
+    this.translateAndSetState();
+  }
+
+  translateAndSetState = async () => {
+    const { resultlang } = this.props;
+    // console.log(resultlang);
+    KENDRA_SUGGESTED_ANSWERS_TRANSLATED = await textTranslate('en', resultlang, KENDRA_SUGGESTED_ANSWERS);
+    // console.log(KENDRA_SUGGESTED_ANSWERS_TRANSLATED);
+    this.setState({
+      translatedAnswers: KENDRA_SUGGESTED_ANSWERS_TRANSLATED,
+    });
   };
 
   private updatePreviousResultIndex = () => {
@@ -128,6 +148,7 @@ export default class TopResults extends React.Component<
     }
   };
 
+
   render() {
     const { results } = this.props;
     const resultsToShow = results.map(this.renderResults);
@@ -138,7 +159,7 @@ export default class TopResults extends React.Component<
 
     return (
       <div className="result-container card">
-        <div className="card-title">{KENDRA_SUGGESTED_ANSWERS}</div>
+        <div className="card-title">{ KENDRA_SUGGESTED_ANSWERS_TRANSLATED }</div>
         <div className="container-divider" />
         <div className="carousel-relative-wrapper inside-card-result-container">
           <div className="carousel-wrapper">
@@ -189,4 +210,31 @@ export default class TopResults extends React.Component<
       </div>
     );
   }
+}
+
+function textTranslate(sourcelang: string, destlang: string, text: string): Promise<string> {
+  return new Promise((resolve) => {
+    var translatedText = text
+    var params = {
+      SourceLanguageCode: sourcelang,
+      TargetLanguageCode: destlang, 
+      Text: text, 
+    };
+
+    if(translate) {
+      translate.translateText(params, function(err, data) {
+        if (err){
+          console.log(err, err.stack);
+          resolve(text)
+        } 
+        else {    
+          translatedText = data.TranslatedText || '' 
+          resolve(translatedText)
+        }
+      });
+    }
+    else {
+      resolve(text)
+    }
+  });
 }

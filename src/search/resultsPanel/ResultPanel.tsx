@@ -40,7 +40,7 @@ export default class ResultsPanel extends React.Component<
   {}
 > {
   private renderPageIndex = () => {
-    const { resultLanguage, currentPageNumber, dataReady, results } = this.props;
+    const { currentPageNumber, dataReady, results } = this.props;
 
     // Ensure spacing is always correct
     let pageIndex = <span>&nbsp;</span>;
@@ -99,13 +99,14 @@ export default class ResultsPanel extends React.Component<
         <div className="results-section">
           <div className="results-number">{this.renderPageIndex()}</div>
 
-          <TopResults results={topResults} submitFeedback={submitFeedback} />
+          <TopResults results={topResults} submitFeedback={submitFeedback} resultlang={resultLanguage}/>
           <FAQResults results={faqResults} submitFeedback={submitFeedback} />
           <ResultSorting
             availableSortingAttributes={this.props.availableSortingAttributes}
             selectedSortingAttribute={this.props.selectedSortingAttribute}
             onSortingAttributeChange={this.props.onSortingAttributeChange}
             onSortingOrderChange={this.props.onSortingOrderChange}
+            resultlang={resultLanguage}
           />
           <DocumentResults
             results={docResults}
