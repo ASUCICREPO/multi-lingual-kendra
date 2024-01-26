@@ -15,15 +15,42 @@ In order to deploy a Kendra search app, we need to have the following prerequisi
 
 
 ## Instructions to run
-### To run locally
+### To develop locally
 - Clone the repo
-- Populate the Access Key ID, Secret Access Key, region and Kendra Index ID fields in `/src/services/local-dev-credentials.json`
-- After entering inside the cloned folder, run `npm install` to install dependencies
+- Populate the Access Key ID, Secret Access Key, and region fields in `/src/services/local-dev-credentials.json`
+- Populate the created Kendra Index ID in its respective field in `/src/services/local-dev-credentials.json`
+- After entering the cloned folder, run `npm install` to install all the dependencies
 - Run `npm start`
 
-### To edit and run through Amplify deployment
+### To develop and run through Amplify deployment
+Amplify requires the code to be present on Github. The current version of the app is currently deployed in the Sandbox environemnt named - ny-gov-multi-lingual-kendra
+
+#### For a new deployment
+- Open AWS Amplify 
+- Select `New App` -> `Host web app`
+- Use GitHub and connect to this repository
+- In the Build and Test Settings, update the build commands
+    ```
+    ...
+        build:
+        commands:
+            - REACT_APP_ACCESS_ID=${REACT_APP_ACCESS_ID}
+            - REACT_APP_ACCESS_KEY=${REACT_APP_ACCESS_KEY}
+            - REACT_APP_REGION=${REACT_APP_REGION}
+            - REACT_APP_INDEXID=${REACT_APP_INDEXID}
+            - npm run build
+    artifacts:
+    ...
+    ```
+- In Advanced Settings, add Environment Variables
+    ```
+    REACT_APP_ACCESS_ID: AWS Access Key ID, 
+    REACT_APP_ACCESS_KEY: AWS Secret Access Key, 
+    REACT_APP_REGION: AWS Region,
+    REACT_APP_INDEXID: Created Kendra Index ID
+    ```
+
 - Clone the repo
-- Ensure that Access Key ID, Secret Access Key, region and Kendra Index ID fields are passed as environment variables to the Amplify deployment.
 - In `/src/services/Kendra.ts`
     - Comment lines 10-17
     - Uncomment lines 19-24
