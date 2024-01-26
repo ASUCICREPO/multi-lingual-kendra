@@ -66,7 +66,7 @@ Amplify requires the code to be present on Github. The current version of the ap
 
 
 
-## Credits:-
+## Credits
 
 Developer: 
     [Anjali Srivastava](https://www.linkedin.com/in/anjalisrivastava/)
