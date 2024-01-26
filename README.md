@@ -64,6 +64,24 @@ Amplify requires the code to be present on Github. The current version of the ap
     - Comment lines 10-17
     - Uncomment lines 19-24
 
+
+
+## Credits:-
+
+Developer: 
+    [Anjali Srivastava](https://www.linkedin.com/in/anjalisrivastava/)
+
+Sr. Solutions Architect, AWS:
+    [Arun Arunachalam](https://www.linkedin.com/in/arunarunachalam/)
+
+Program Manager, AWS: 
+    [Jubleen Vilku](https://www.linkedin.com/in/jubleen-vilku/)
+
+General Manager, ASU: 
+    [Ryan Hendrix](https://www.linkedin.com/in/ryanahendrix/)
+
+This project is designed and developed with guidance and support from the [ASU Cloud Innovation Center](https://smartchallenges.asu.edu).
+
 ---------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------
