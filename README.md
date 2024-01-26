@@ -1,6 +1,6 @@
 # Multi-Lingual Kendra Search App
 
-The app provides multi-lingual search experience using*Amazon Kendra Search*, *Comprehend* and *Translate*.
+The app provides multi-lingual search experience using **Amazon Kendra Search**, **Comprehend** and **Translate**.
 The portal can be used for all the [languages supported by Kendra Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html#what-is-languages-supported)
 
 
