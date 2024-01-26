@@ -1,11 +1,12 @@
 # Multi-Lingual Kendra Search App
 
-The app provides multi-lingual search experience using Amazon Kendra Search, Comprehend and Translate.
+The app provides multi-lingual search experience using*Amazon Kendra Search*, *Comprehend* and *Translate*.
 The portal can be used for all the [languages supported by Kendra Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html#what-is-languages-supported)
 
 
 ## Development
-The Kendra Search Portal [code](https://docs.aws.amazon.com/kendra/latest/dg/deploying.html) has been taken as-is. The integration with Comprehend and Translate are then done directly in the given codebase.
+The [Kendra Search Portal code](https://docs.aws.amazon.com/kendra/latest/dg/deploying.html) has been taken as-is. The integration with Comprehend and Translate is then done directly in the given codebase.
+
 Comprehend has been used to detect the language being entered in the Search Box, and Translate has been used to translate the input language to English. Then the search input (in English) is sent to Kendra and search results are obtained. These search results again go through the Translate feature to be converted back to the language of the originally entered text and is displayed on the Result Panel in the portal. 
 
 ## Prerequisites
@@ -22,7 +23,7 @@ In order to deploy a Kendra search app, we need to have the following prerequisi
     - aws-sdk
 
 
-## Instructions to run
+## Instructions to develop
 ### To develop locally
 - Clone the repo
 - Populate the Access Key ID, Secret Access Key, and region fields in `/src/services/local-dev-credentials.json`
