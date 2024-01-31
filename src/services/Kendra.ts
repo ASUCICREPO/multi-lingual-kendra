@@ -57,7 +57,7 @@ if (hasErrors) {
 }
 
 export const errors = _loadingErrors;
-export const indexId: string = config ? config.indexId || "" : "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
+export const indexId: string = config ? config.indexId || "" : "";
 
 export const kendra = !hasErrors
   ? new Kendra({
