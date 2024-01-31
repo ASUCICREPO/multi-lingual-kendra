@@ -29,6 +29,8 @@ In order to deploy a Kendra search app, we need to have the following prerequisi
 - Populate the Access Key ID, Secret Access Key, and region fields in `/src/services/local-dev-credentials.json`
 - Populate the created Kendra Index ID in its respective field in `/src/services/local-dev-credentials.json`
 - After entering the cloned folder, run `npm install` to install all the dependencies
+- In `/src/services/Kendra.ts`
+    - Comment lines 19-24 that update config
 - Run `npm start`
 
 ### To develop and run through Amplify deployment
@@ -60,9 +62,7 @@ Amplify requires the code to be present on Github. The current version of the ap
     ```
 
 - Clone the repo
-- In `/src/services/Kendra.ts`
-    - Comment lines 10-17
-    - Uncomment lines 19-24
+
 
 
 

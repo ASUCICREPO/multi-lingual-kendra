@@ -57,14 +57,8 @@ if (hasErrors) {
 }
 
 export const errors = _loadingErrors;
-// export const indexId = config ? config.indexId : "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
+export const indexId: string = config ? config.indexId || "" : "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
 
-export const indexId: string = config ? config.indexId || "c0900ac7" : "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
-
-
-// export const indexId = "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
-console.log(config.indexId)
-console.log(indexId)
 export const kendra = !hasErrors
   ? new Kendra({
       accessKeyId: config.accessKeyId,
