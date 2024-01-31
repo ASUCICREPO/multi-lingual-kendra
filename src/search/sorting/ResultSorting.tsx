@@ -49,7 +49,6 @@ export class ResultSorting extends React.Component<Props, { translatedDict: Reco
     translatedDict[DEFAULT_SORT_ATTRIBUTE] = await textTranslate('en', resultlang, DEFAULT_SORT_ATTRIBUTE);
     translatedDict[i18n.sort] =  await textTranslate('en', resultlang, i18n.sort);
     this.setState({ translatedDict });
-    // console.log(translatedDict)
 
   };
 
@@ -94,7 +93,6 @@ export class ResultSorting extends React.Component<Props, { translatedDict: Reco
             attribute !== DocumentAttributeKeys.CreatedAt &&
             attribute !== DocumentAttributeKeys.UpdatedAt
           ) {
-            // console.log(translatedDict?.[attribute]);
             return (
               <option
                 value={attribute}
