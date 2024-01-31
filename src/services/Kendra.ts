@@ -6,22 +6,22 @@ import Translate from "aws-sdk/clients/translate";
 
 const _loadingErrors = [];
 
-// // If you get an error here, please revisit the Getting Started section of the README
-// let config = null;
-// try {
-//   config = require(`./${CREDENTIALS_FILE_NAME}`);
-// } catch {
-//   _loadingErrors.push(
-//     `${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME} could not be loaded. See Getting Started in the README.`
-//   );
-// }
-
-const config = {
-  accessKeyId: process.env.REACT_APP_ACCESS_ID,
-  secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
-  region: process.env.REACT_APP_REGION,
-  indexId: process.env.REACT_APP_INDEXID
+// If you get an error here, please revisit the Getting Started section of the README
+let config = null;
+try {
+  config = require(`./${CREDENTIALS_FILE_NAME}`);
+} catch {
+  _loadingErrors.push(
+    `${CREDENTIALS_FILE_PATH}/${CREDENTIALS_FILE_NAME} could not be loaded. See Getting Started in the README.`
+  );
 }
+
+// const config = {
+//   accessKeyId: process.env.REACT_APP_ACCESS_ID,
+//   secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+//   region: process.env.REACT_APP_REGION,
+//   indexId: process.env.REACT_APP_INDEXID
+// }
 
 if (config) {
   if (!config.accessKeyId) {
@@ -57,11 +57,11 @@ if (hasErrors) {
 }
 
 export const errors = _loadingErrors;
-// console.log(config.indexId)
-export const indexId = config ? config.indexId : undefined;
+export const indexId = config ? config.indexId : "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
 
 // export const indexId = "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
-
+console.log(config.indexId)
+console.log(indexId)
 export const kendra = !hasErrors
   ? new Kendra({
       accessKeyId: config.accessKeyId,
