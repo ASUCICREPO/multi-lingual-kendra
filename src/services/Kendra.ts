@@ -57,8 +57,10 @@ if (hasErrors) {
 }
 
 export const errors = _loadingErrors;
+// console.log(config.indexId)
+export const indexId = config ? config.indexId : undefined;
 
-export const indexId = "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
+// export const indexId = "c0900ac7-9d8a-435f-bdb6-ba408cb89a96";
 
 export const kendra = !hasErrors
   ? new Kendra({
